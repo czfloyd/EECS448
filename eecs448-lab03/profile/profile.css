@@ -1,2 +1,33 @@
-.picture-container {
+.profile {
+    width: 60%;
+}
+
+.profilePicture {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: rotate(90deg);
+    width: 60%;
+}
+
+.profileText {
+    background-image: url(http://talloiresnetwork.tufts.edu/wp-content/uploads/KU-Skyline_Talloires.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+}
+
+body {
+    background-color: lightblue;
+    color: darkred;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 22pt;
+}
+
+p {
+    background-color: rgba(173, 216, 230, .5);
+}
+
+a:hover {
+    color: darkmagenta;
 }
