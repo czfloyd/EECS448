@@ -5,4 +5,7 @@ function passwordSubmit() {
   else if (document.getElementById("pword").value.length < 9) {
     alert("Password was not strong enough!")
   }
+  else {
+    alert("Passwords matched!")
+  }
 }
