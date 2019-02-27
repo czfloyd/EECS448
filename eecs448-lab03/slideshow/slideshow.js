@@ -4,7 +4,7 @@ function previous() {
   location = location.substring(location.indexOf("resources"));
   let value = pictures.indexOf(location);
   value--;
-  if (value == -1){
+  if (value == -1) {
     value = 4;
   }
   document.getElementById("slideshow").src = pictures[value];
@@ -16,7 +16,7 @@ function next() {
   location = location.substring(location.indexOf("resources"));
   let value = pictures.indexOf(location);
   value++
-  if (value == 5){
+  if (value == 5) {
     value = 0;
   }
   document.getElementById("slideshow").src = pictures[value];
