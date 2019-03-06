@@ -15,7 +15,7 @@ $corrects = array("70 km/hr", "2 meters", "15 cm", "3 stomachs", "2 toes");
 $numRight = 0;
 
 for ($i = 0; $i < 5; $i++){
-  echo $questions[$i] + "<br>";
+  echo $questions[$i] . "<br>";
   echo "You answered: " . $answers[$i] . "<br>";
   echo "Correct answer: " . $corrects[$i] . "<br> <br>";
   if ($answers[$i] == $corrects[$i]){
