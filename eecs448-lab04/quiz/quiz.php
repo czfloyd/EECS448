@@ -1,6 +1,6 @@
 <?php
 //access the global array called $_POST to get the values from the text fields
-echo "<head><title>Results</title></head>";
+echo '<head><title>Results</title><link href="../../styles/style.css" rel="stylesheet" type="text/css" /></head>';
 
 $answers = array($_POST["q1"], $_POST["q2"], $_POST["q3"], $_POST["q4"], $_POST["q5"]);
 $questions = array(

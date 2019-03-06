@@ -1,0 +1,13 @@
+h1, h3 {
+  color: lightpink;
+}
+
+th {
+  color: black;
+  background-color: lightgreen;
+}
+
+td {
+  color: black;
+  background-color: lightblue;
+}

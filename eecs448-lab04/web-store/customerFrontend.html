@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <title> Web Store </title>
+    <script type="text/javascript" src="formChecker.js"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="../../styles/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1> Welcome to the Dark Market! </h1><br>
+  <h3> What would you like to buy? </h3><br>
+  <br>
+  <form onsubmit="formSubmit()" action="customerBackend.php" method="post">
+    <h3> Siberian Tiger Tusks - $350 each </h3><br>
+    Amount: <input type="number" min="0" name="tusks" value="0"><br>
+    <h3> Wooly Mammoth Pelt - $470 each </h3><br>
+    Amount: <input type="number" min="0" name="pelts" value="0"><br>
+    <h3> Giant Sloth Claw - $110 each </h3><br>
+    Amount: <input type="number" min="0" name="claws" value="0"><br>
+    <h3> Shipping Options </h3><br>
+    <input type="radio" name="shipping" value="Free" checked="true"> Free 7 day <br>
+    <input type="radio" name="shipping" value="3 Day"> $5.00 3 day <br>
+    <input type="radio" name="shipping" value="Overnight"> $50.00 Overnight <br>
+    <h3> Your Personal Information </h3><br>
+    Email: <input type="email" name="email"><br>
+    Password: <input type="password" name="password"><br>
+    <br>
+    <input type="submit">
+  </form>
+</body>
+
+</html>
