@@ -1,5 +1,6 @@
 <?php
 $mysqli = new mysqli("mysql.eecs.ku.edu", "c827f144", "eiphah4k", "c827f144");
+echo '<head><title>User Creation Landing</title><link href="../../styles/style.css" rel="stylesheet" type="text/css" /></head>';
 
 $user = $_POST["user"];
 /* check connection */
