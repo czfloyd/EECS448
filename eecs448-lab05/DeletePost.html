@@ -1,24 +1,34 @@
 <html>
 
 <head>
-  <title> Post Deletion </title>
-  <link href="../styles/style.css" rel="stylesheet" type="text/css" />
+    <title> Post Deletion </title>
+    <link href="../styles/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-  <p>
-    Who would you like to delete?
-  </p>
-  <form action="">
-    <select name="user">
-      <?php 
-          $sql = mysqli_query($connection, "SELECT user_id FROM users");
-          while ($row = $sql->fetch_assoc()){
-              echo "<option value=\"" . $row['username'] . "\">" . $row['username'] . "</option>";
-          }
-      ?>
-    </select>
-  </form>
+    <p>
+        Which posts would you like to delete?
+    </p>
+
+
+    <form method='post' action='DeletePost.php'>
+        <tr>
+            <th>PostID</th>
+            <th>AuthorID</th>
+            <th>Content</th>
+            <th>Delete?</th>
+        </tr>
+        <?php 
+            $sql = mysqli_query($connection, "SELECT * FROM Posts");
+            while ($row = $sql->fetch_assoc()){
+                echo "<tr>";
+                echo "<td>" . $row['post_id'] . "</td><td>" . $row['author_id'] . "</td><td>" . $row['content'] . "</td>";
+                echo "<td><input type=\"checkbox\" name=\"postsToDelete[]\" value=\"" . $row[post_id] . "\"></td>";
+                echo "</tr>";
+            }
+        ?>
+        </table> <input type='submit' class='buttons'>
+    </form>
 </body>
 
 </html>
