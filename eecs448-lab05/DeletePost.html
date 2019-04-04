@@ -1,0 +1,24 @@
+<html>
+
+<head>
+  <title> Post Deletion </title>
+  <link href="../styles/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <p>
+    Who would you like to delete?
+  </p>
+  <form action="">
+    <select name="user">
+      <?php 
+          $sql = mysqli_query($connection, "SELECT user_id FROM users");
+          while ($row = $sql->fetch_assoc()){
+              echo "<option value=\"" . $row['username'] . "\">" . $row['username'] . "</option>";
+          }
+      ?>
+    </select>
+  </form>
+</body>
+
+</html>
