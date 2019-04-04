@@ -17,7 +17,7 @@ if ($result = $mysqli->query($query)) {
     
     /* fetch associative array */
     while ($row = $result->fetch_assoc()) {
-        echo("<tr><td>" . $row . "</td></tr>");
+        echo("<tr><td>" . $row['user_id'] . "</td></tr>");
     }
 
     /* free result set */
