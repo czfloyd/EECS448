@@ -10,15 +10,16 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
-$query = "SELECT * FROM Users";
+$query = "SELECT * FROM Posts WHERE author_id = '" . $user . "'";
 
 if ($result = $mysqli->query($query)) {
     echo "<table><tr>";
-    echo "<th>UserID</th>";
+    echo "<th>PostID</th><th>AuthorID</th><th>Content</th>";
     echo "</tr>";
+
     /* fetch associative array */
     while ($row = $result->fetch_assoc()) {
-        echo("<tr><td>" . $row['user_id'] . "</td></tr>");
+        echo("<tr><td>" . $row['post_id'] . "</td><td>" . $row['author_id'] . "</td><td>" . $row['content'] . "</td></tr>");
     }
     echo "</table>";
 
@@ -26,8 +27,8 @@ if ($result = $mysqli->query($query)) {
     $result->free();
 }
 
-echo '</body>';
+echo "</body>";
 /* close connection */
 $mysqli->close();
-echo '</html>'
+echo '</html>';
 ?>

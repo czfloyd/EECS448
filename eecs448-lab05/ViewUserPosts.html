@@ -1,5 +1,4 @@
 <html>
-
 <head>
   <title> Post Deletion </title>
   <link href="../styles/style.css" rel="stylesheet" type="text/css" />
@@ -9,15 +8,21 @@
   <p>
     Who's posts would you like to see?
   </p>
-  <form action="VeiwUserPosts.php" method="post">
+  <form action="ViewUserPosts.php" method="post">
     <select name="user">
-      <?php 
-          $sql = mysqli_query($connection, "SELECT user_id FROM Users");
-          while ($row = $sql->fetch_assoc()){
-              echo "<option value=\"" . $row['username'] . "\">" . $row['username'] . "</option>";
-          }
+      <?php
+	$connection = mysqli_connect("mysql.eecs.ku.edu", "c827f144", "eiphah4k", "c827f144");  
+	$query = "SELECT user_id FROM Users"; 
+	if ($result = mysqli_query($connection, $query)){
+	  while ($row = mysqli_fetch_assoc($result)){
+	    echo "<option value=\"" . $row['user_id'] . "\">" . $row['user_id'] . "</option>";
+          } 
+	}      
       ?>
     </select>
+    <br/>
+    <br/>
+    <input type="submit">
   </form>
 </body>
 

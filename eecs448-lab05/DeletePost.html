@@ -12,22 +12,27 @@
 
 
     <form method='post' action='DeletePost.php'>
+	<table>
         <tr>
             <th>PostID</th>
             <th>AuthorID</th>
             <th>Content</th>
             <th>Delete?</th>
         </tr>
-        <?php 
-            $sql = mysqli_query($connection, "SELECT * FROM Posts");
-            while ($row = $sql->fetch_assoc()){
-                echo "<tr>";
+	<?php
+          $connection = mysqli_connect("mysql.eecs.ku.edu", "c827f144", "eiphah4k", "c827f144");  
+          $query = "SELECT * FROM Posts"; 
+          if ($result = mysqli_query($connection, $query)){
+            while ($row = mysqli_fetch_assoc($result)){
+		echo "<tr>";
                 echo "<td>" . $row['post_id'] . "</td><td>" . $row['author_id'] . "</td><td>" . $row['content'] . "</td>";
                 echo "<td><input type=\"checkbox\" name=\"postsToDelete[]\" value=\"" . $row[post_id] . "\"></td>";
-                echo "</tr>";
-            }
+                echo "</tr>";              
+            } 
+          }      
         ?>
-        </table> <input type='submit' class='buttons'>
+        </table> 
+	<input type='submit' class='buttons'>
     </form>
 </body>
 
