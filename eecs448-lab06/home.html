@@ -1,48 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-   <title>Vue Lab</title>
-   <link
-     rel="stylesheet"    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-     crossorigin="anonymous"
-   />
- </head>
- <body>
-   <div class="container">
-     <div id="app">
-       Message: {{ message }}
-       <ol>
-	 <li v-for="todo in todos">
-	   {{ todo }}
-         </li>
-       </ol>
-     </div>
-   </div>
-   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-   <script
-     src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-     crossorigin="anonymous"
-   ></script>
-   <script
-     src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-     crossorigin="anonymous"
-   ></script>
-   <script>
-     const app = new Vue({
-       el: '#app',
-       data: {
-         message: 'Hello Vue!',
-	 todos: ["Wake up", "Make Breakfast", "Go to School"]
-       }
-     })
-   </script>
- </body>
-</html>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Vue Lab</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link href="../styles/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div class="container">
+    <div id="app">
+      <input v-model.number="numStops" type="number">
+      <br />
+      <div v-for="stop in filteredStops">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{stop.name}}</h5>
+            <p class="card-text">{{stop.description}}</p>
+            <p class="card-text">Distance: {{stop.distance}}km</p>
+          </div>
+        </div>
+        </dive>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello Vue!',
+          todos: ["Wake up", "Make Breakfast", "Go to School"],
+          stops: [],
+          numStops: 10,
+          location: {},
+        },
+        mounted: function () {
+          fetch('https://utils.pauliankline.com/stops.json')
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (myJson) {
+              app.stops = myJson;
+              console.log(JSON.stringify(myJson));
+            });
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(recordPosition);
+          }
+
+          const watcher = navigator.geolocation.watchPosition(recordPosition);
+
+          function recordPosition(position) {
+            app.location = { "lon": position.coords.longitude, "lat": position.coords.latitude }
+          }
+        },
+        computed: {
+          filteredStops: function () {
+            for (let stop of this.stops) {
+              //distance formula from https://www.movable-type.co.uk/scripts/latlong.html
+              let R = 6371e3; // metres
+              let φ1 = stop.lat * Math.PI / 180;
+              let φ2 = stop.lon * Math.PI / 180;
+              let Δφ = (this.location.lat - stop.lat) * Math.PI / 180;
+              let Δλ = (this.location.lon - stop.lon) * Math.PI / 180;
+
+              let a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+              let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+              let d = R * c;
+
+              stop.distance = d / 1000;
+              stop.distance = stop.distance.toFixed(2);
+            }
+            return this.stops.sort((a, b) => { return a.distance - b.distance }).slice(0, this.numStops)
+          }
+
+        }
+      })
+    </script>
+</body>
+
+</html>
