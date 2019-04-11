@@ -14,7 +14,7 @@
 <body>
   <div class="container">
     <div id="app">
-      <input v-model.number="numStops" type="number">
+      <input v-model.number="numStops" type="number" min="0">
       <br />
       <div v-for="stop in filteredStops">
         <div class="card" style="width: 18rem; color: black">
