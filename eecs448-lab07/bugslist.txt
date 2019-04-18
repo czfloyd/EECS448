@@ -1,0 +1,5 @@
+isEmpty() always returns true, regardless of whether or not the list is empty
+This is probably making it so the delete functions short circuit, as they think the list is empty
+
+addBack() appears to always add to the front
+Might also be caused by isEmpty if addBack adds to the front if the list is empty
