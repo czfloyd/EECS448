@@ -1,5 +1,12 @@
-isEmpty() always returns true, regardless of whether or not the list is empty
-This is probably making it so the delete functions short circuit, as they think the list is empty
+isEmpty() always returns true, regardless of whether or not the list is empty.
+This is probably making it so the delete functions short circuit, as they think the list is empty.
 
-addBack() appears to always add to the front
-Might also be caused by isEmpty if addBack adds to the front if the list is empty
+addBack() appears to always add to the front.
+Might also be caused by isEmpty if addBack adds to the front if the list is empty.
+
+The program also has many memory leaks, although this is probably largely caused by
+it thinking that the lists are empty and therefore just deletes the reference.
+
+Ultimately all of the bugs can be explained in the context of isEmpty() always returning true.
+It is impossible to know if much more is broken beyond that, since there are implementations
+of all of the broken methods that depend on a working isEmpty().
